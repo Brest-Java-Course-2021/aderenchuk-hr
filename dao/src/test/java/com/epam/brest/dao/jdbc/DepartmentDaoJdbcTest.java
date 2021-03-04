@@ -56,8 +56,33 @@ import java.util.List;
         Assert.assertNotNull(departments);
         Assert.assertTrue(departments.size() > 0);
 
-        Department department = new Department("HR");
-        departmentDao.create(department);
+        departmentDao.create(new Department("HR"));
+
+        List<Department> realDepartments = departmentDao.findAll();
+        Assert.assertEquals(departments.size() + 1, realDepartments.size());
+    }
+
+    @Test
+    public void createDepartmentWithTheSameNameTest() {
+        List<Department> departments = departmentDao.findAll();
+        Assert.assertNotNull(departments);
+        Assert.assertTrue(departments.size() > 0);
+
+        departmentDao.create(new Department("HR"));
+        departmentDao.create(new Department("HR"));
+
+        List<Department> realDepartments = departmentDao.findAll();
+        Assert.assertEquals(departments.size() + 1, realDepartments.size());
+    }
+
+    @Test
+    public void createDepartmentWithTheSameNameDiffCaseTest() {
+        List<Department> departments = departmentDao.findAll();
+        Assert.assertNotNull(departments);
+        Assert.assertTrue(departments.size() > 0);
+
+        departmentDao.create(new Department("HR"));
+        departmentDao.create(new Department("Hr"));
 
         List<Department> realDepartments = departmentDao.findAll();
         Assert.assertEquals(departments.size() + 1, realDepartments.size());
