@@ -86,6 +86,8 @@ public class DepartmentDaoJdbc implements DepartmentDao {
         return namedParameterJdbcTemplate.update(SQL_UPDATE_DEPARTMENT, sqlParameterSource);
     }
 
+
+
     @Override
     public Integer delete(Integer departmentId) {
         LOGGER.debug("Delete department by id: {}", departmentId);

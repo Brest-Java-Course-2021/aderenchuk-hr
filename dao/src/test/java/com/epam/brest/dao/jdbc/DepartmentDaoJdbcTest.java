@@ -14,6 +14,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.List;
+import java.util.Optional;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath*:test-db.xml", "classpath*:test-dao.xml"})
@@ -50,7 +51,7 @@ import java.util.List;
             departmentDao.findById(999).get();
     }
 
-    @Test
+    @Test (expected = IllegalArgumentException.class)
     public void createDepartmentTest() {
         List<Department> departments = departmentDao.findAll();
         Assert.assertNotNull(departments);
@@ -62,7 +63,7 @@ import java.util.List;
         Assert.assertEquals(departments.size() + 1, realDepartments.size());
     }
 
-    @Test
+    @Test (expected = IllegalArgumentException.class)
     public void createDepartmentWithTheSameNameTest() {
         List<Department> departments = departmentDao.findAll();
         Assert.assertNotNull(departments);
@@ -70,12 +71,9 @@ import java.util.List;
 
         departmentDao.create(new Department("HR"));
         departmentDao.create(new Department("HR"));
-
-        List<Department> realDepartments = departmentDao.findAll();
-        Assert.assertEquals(departments.size() + 1, realDepartments.size());
     }
 
-    @Test
+    @Test (expected = IllegalArgumentException.class)
     public void createDepartmentWithTheSameNameDiffCaseTest() {
         List<Department> departments = departmentDao.findAll();
         Assert.assertNotNull(departments);
@@ -83,17 +81,31 @@ import java.util.List;
 
         departmentDao.create(new Department("HR"));
         departmentDao.create(new Department("Hr"));
-
-        List<Department> realDepartments = departmentDao.findAll();
-        Assert.assertEquals(departments.size() + 1, realDepartments.size());
     }
 
     @Test
-    public void testLogger() {
-        LOGGER.trace("hello trace");
-        LOGGER.debug("hello debug");
-        LOGGER.info("hello info");
-        LOGGER.warn("hello warn");
-        LOGGER.error("hello error");
+    public void updateDepartmentTest() {
+        List<Department> departments = departmentDao.findAll();
+        Assert.assertNotNull(departments);
+        Assert.assertTrue(departments.size() > 0);
+
+        Department department = departments.get(0);
+        department.setDepartmentName("TEST_DEPARTMENT");
+
+        departmentDao.update(department);
+
+        Optional<Department> realDepartments = departmentDao.findById(department.getDepartmentId());
+        Assert.assertEquals("TEST_DEPARTMENT", realDepartments.get().getDepartmentName());
     }
+
+//    @Test
+//    public void updateDepartmentNotUniqueTest() {
+//        List<Department> departments = departmentDao.findAll();
+//        Assert.assertNotNull(departments);
+//        Assert.assertTrue(departments.size() > 0);
+//
+//        Department department = departments.get(0);
+//        department.setDepartmentName(departments.get(1).getDepartmentName());
+//        departmentDao.update(department);
+//    }
 }
