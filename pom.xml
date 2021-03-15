@@ -13,7 +13,10 @@
         <module>model</module>
         <module>test-db</module>
         <module>dao</module>
+        <module>dao-api</module>
         <module>web-app</module>
+        <module>service-api</module>
+
     </modules>
 
     <properties>
