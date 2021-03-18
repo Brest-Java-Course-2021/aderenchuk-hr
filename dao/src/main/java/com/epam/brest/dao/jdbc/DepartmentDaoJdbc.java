@@ -68,7 +68,7 @@ public class DepartmentDaoJdbc implements DepartmentDao {
         KeyHolder keyHolder = new GeneratedKeyHolder();
         SqlParameterSource sqlParameterSource = new MapSqlParameterSource("DEPARTMENT_NAME", department.getDepartmentName());
         namedParameterJdbcTemplate.update(createSql, sqlParameterSource, keyHolder);
-        Integer departmentId = Objects.requireNonNull(keyHolder.getKey().intValue());
+        Integer departmentId = Objects.requireNonNull(keyHolder.getKey()).intValue();
         department.setDepartmentId(departmentId);
         long stopTime = System.nanoTime();
         LOGGER.debug("Execution time: {}", stopTime - startTime);
