@@ -6,7 +6,6 @@ import com.epam.brest.model.Department;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.junit.jupiter.MockitoExtension;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,9 +18,9 @@ import java.util.Optional;
 
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(locations = {"classpath*:test-db.xml", "classpath*:test-dao.xml", "classpath*:dao.xml"})
-    public class DepartmentDaoJdbcTest {
+    public class DepartmentDaoJdbcIT {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(DepartmentDaoJdbcTest.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(DepartmentDaoJdbcIT.class);
 
         @Autowired
         private DepartmentDao departmentDao;
