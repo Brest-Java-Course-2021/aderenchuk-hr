@@ -59,7 +59,7 @@ import java.util.Optional;
         Assertions.assertNotNull(departments);
         Assertions.assertTrue(departments.size() > 0);
 
-        departmentDao.create(new Department("HR"));
+            departmentDao.create(new Department("DEV"));
 
         List<Department> realDepartments = departmentDao.findAll();
         Assertions.assertEquals(departments.size() + 1, realDepartments.size());
@@ -70,9 +70,10 @@ import java.util.Optional;
         List<Department> departments = departmentDao.findAll();
         Assertions.assertNotNull(departments);
         Assertions.assertTrue(departments.size() > 0);
-
-        departmentDao.create(new Department("HR"));
-        departmentDao.create(new Department("HR"));
+        Assertions.assertThrows(IllegalArgumentException.class,  () -> {
+            departmentDao.create(new Department("HR"));
+            departmentDao.create(new Department("HR"));
+        });
     }
 
     @Test
