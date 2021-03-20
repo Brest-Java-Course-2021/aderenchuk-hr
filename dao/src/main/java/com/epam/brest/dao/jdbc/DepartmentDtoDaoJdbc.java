@@ -1,3 +1,5 @@
+package com.epam.brest.dao.jdbc;
+
 import com.epam.brest.dao.DepartmentDtoDao;
 import com.epam.brest.model.dto.DepartmentDto;
 import org.slf4j.Logger;
@@ -9,6 +11,9 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+/**
+ *  Department DTO DAO implementation.
+ */
 @Component
 public class DepartmentDtoDaoJdbc implements DepartmentDtoDao {
 
@@ -31,4 +36,5 @@ public class DepartmentDtoDaoJdbc implements DepartmentDtoDao {
                 BeanPropertyRowMapper.newInstance(DepartmentDto.class));
         return departments;
     }
+
 }
