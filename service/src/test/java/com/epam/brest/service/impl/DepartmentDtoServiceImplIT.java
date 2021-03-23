@@ -14,7 +14,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(SpringExtension.class)
-@ContextConfiguration(locations = {"classpath*:test-db.xml", "classpath*:service-context-test.xml", "classpath*:dao.xml"})
+@ContextConfiguration(locations = {"classpath*:test-db.xml", "classpath*:serv-context-test.xml", "classpath*:dao.xml"})
 @Transactional
 class DepartmentDtoServiceImplIT {
 
