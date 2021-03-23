@@ -21,19 +21,19 @@ public class DepartmentController {
     }
 
     @GetMapping(value = "/departments")
-    public String departments(Model model) {
+    public final String departments(Model model) {
         LOGGER.debug("departments()");
         model.addAttribute("departments", departmentDtoService.findAllWithAvgSalary());
         return "departments";
     }
 
     @GetMapping(value = "/department/{id}")
-    public String gotoEditDepartmentPage(@PathVariable Integer id, Model model) {
+    public final String gotoEditDepartmentPage(@PathVariable Integer id, Model model) {
         return "department";
     }
 
     @GetMapping(value = "/department/add")
-    public String gotoAddDepartmentPage(Model model) {
+    public final String gotoAddDepartmentPage(Model model) {
         return "department";
     }
 

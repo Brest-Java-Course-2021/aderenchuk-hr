@@ -70,7 +70,7 @@
                         </thead>
                         <tbody>
                             <tr th:each="department : ${departments}">
-                                <td th:text="$department.department.Name">CEO</td>
+                                <td th:text="${department.departmentName}">CEO</td>
                                 <td th:text="${department.avgSalary}">10000</td>
                             <td class="text-end">
                                 <a href="department.html"
@@ -86,7 +86,7 @@
                                 </span>
                             </td>
                         </tr>
-                        <tr th:revome="all">
+                        <tr th:remove="all">
                             <td>&nbsp;&nbsp;Accounting</td>
                             <td>2500</td>
                             <td class="text-end">

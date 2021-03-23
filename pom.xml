@@ -224,7 +224,7 @@
                         <contextPath>/</contextPath>
                     </webApp>
                     <httpConnector>
-                        <port>8080</port>
+                        <port>8070</port>
                     </httpConnector>
                 </configuration>
             </plugin>

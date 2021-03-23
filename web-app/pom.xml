@@ -12,7 +12,7 @@
 
     <artifactId>web-app</artifactId>
     <description>Spring MVC Web application</description>
-    <packaging>jar</packaging>
+    <packaging>war</packaging>
 
     <dependencies>
 
