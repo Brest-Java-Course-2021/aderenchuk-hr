@@ -1,5 +1,6 @@
 package com.epam.brest.service;
 
+import com.epam.brest.model.Department;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +8,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+
+import java.util.Optional;
 
 @Controller
 public class DepartmentController {
@@ -15,10 +19,15 @@ public class DepartmentController {
 
     private final DepartmentDtoService departmentDtoService;
 
+    private final DepartmentService departmentService;
+
     @Autowired
-    public DepartmentController(DepartmentDtoService departmentDtoService) {
+    public DepartmentController(DepartmentDtoService departmentDtoService,
+                                DepartmentService departmentService) {
         this.departmentDtoService = departmentDtoService;
+        this.departmentService = departmentService;
     }
+
 
     @GetMapping(value = "/departments")
     public final String departments(Model model) {
@@ -29,12 +38,50 @@ public class DepartmentController {
 
     @GetMapping(value = "/department/{id}")
     public final String gotoEditDepartmentPage(@PathVariable Integer id, Model model) {
+        LOGGER.debug("gotoEditDepartmentPage({},{})", id, model);
+        Optional<Department> optionalDepartment = departmentService.findById(id);
+        if (optionalDepartment.isPresent()) {
+            model.addAttribute("isNew", false);
+            model.addAttribute("department", optionalDepartment.get());
+            return "department";
+        } else {
+            //TODO department not found - pass error message as parameter or handle not found error
+                return "redirect:departments";
+        }
+
+    }
+
+    @GetMapping(value = "/department")
+    public final String gotoAddDepartmentPage(Model model) {
+        LOGGER.debug("gotoDepartmentPage({})", model);
+        model.addAttribute("isNew", true);
+        model.addAttribute("department", new Department());
         return "department";
     }
 
-    @GetMapping(value = "/department/add")
-    public final String gotoAddDepartmentPage(Model model) {
-        return "department";
+    @PostMapping(value = "/department")
+    public String addDepartment(Department department) {
+        LOGGER.debug("addDepartment({}, {})", department);
+        this.departmentService.create(department);
+        return "redirect:/departments";
     }
+
+    @PostMapping(value = "department/{id}")
+    public String updateDepartment(Department department) {
+
+        LOGGER.debug("updateDepartment({}, {})",department);
+        this.departmentService.update(department);
+        return "redirect:/departments";
+    }
+
+    @GetMapping(value = "/department/{id}/delete")
+    public final String deleteDepartmentById(@PathVariable Integer id, Model model) {
+
+        LOGGER.debug("delete({},{})", id, model);
+        departmentService.delete(id);
+        return "redirect:/departments";
+    }
+
+
 
 }

@@ -16,6 +16,8 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import java.util.List;
 import java.util.Optional;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(locations = {"classpath*:test-db.xml", "classpath*:test-dao.xml", "classpath*:dao.xml"})
     public class DepartmentDaoJdbcIT {
@@ -29,14 +31,14 @@ import java.util.Optional;
         public void findAllTest() {
             List<Department> departments = departmentDao.findAll();
         Assertions.assertNotNull(departments);
-        Assertions.assertTrue(departments.size() > 0);
+        assertTrue(departments.size() > 0);
     }
 
     @Test
     public void findByIdTest() {
         List<Department> departments = departmentDao.findAll();
         Assertions.assertNotNull(departments);
-        Assertions.assertTrue(departments.size() > 0);
+        assertTrue(departments.size() > 0);
 
         Integer departmentId = departments.get(0).getDepartmentId();
         Department expDepartment = departmentDao.findById(departmentId).get();
@@ -48,16 +50,16 @@ import java.util.Optional;
 
     @Test
     public void findByIdExceptionalTest() {
-            Assertions.assertThrows(EmptyResultDataAccessException.class, () -> {
-                departmentDao.findById(999).get();
-        });
+
+            Optional<Department> optionalDepartment = departmentDao.findById(999);
+            assertTrue(optionalDepartment.isEmpty());
     }
 
     @Test
     public void createDepartmentTest() {
         List<Department> departments = departmentDao.findAll();
         Assertions.assertNotNull(departments);
-        Assertions.assertTrue(departments.size() > 0);
+        assertTrue(departments.size() > 0);
 
             departmentDao.create(new Department("DEV"));
 
@@ -69,7 +71,7 @@ import java.util.Optional;
     public void createDepartmentWithTheSameNameTest() {
         List<Department> departments = departmentDao.findAll();
         Assertions.assertNotNull(departments);
-        Assertions.assertTrue(departments.size() > 0);
+        assertTrue(departments.size() > 0);
         Assertions.assertThrows(IllegalArgumentException.class,  () -> {
             departmentDao.create(new Department("HR"));
             departmentDao.create(new Department("HR"));
@@ -80,7 +82,7 @@ import java.util.Optional;
     public void createDepartmentWithTheSameNameDiffCaseTest() {
         List<Department> departments = departmentDao.findAll();
         Assertions.assertNotNull(departments);
-        Assertions.assertTrue(departments.size() > 0);
+        assertTrue(departments.size() > 0);
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
             departmentDao.create(new Department("HR"));
             departmentDao.create(new Department("Hr"));
@@ -91,7 +93,7 @@ import java.util.Optional;
     public void updateDepartmentTest() {
         List<Department> departments = departmentDao.findAll();
         Assertions.assertNotNull(departments);
-        Assertions.assertTrue(departments.size() > 0);
+        assertTrue(departments.size() > 0);
 
         Department department = departments.get(0);
         department.setDepartmentName("TEST_DEPARTMENT");

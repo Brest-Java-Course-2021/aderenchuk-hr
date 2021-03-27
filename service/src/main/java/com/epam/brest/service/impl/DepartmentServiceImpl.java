@@ -48,4 +48,9 @@ public class DepartmentServiceImpl implements DepartmentService {
         return departmentDao.delete(departmentId);
     }
 
+    @Override
+    public Integer count() {
+        return departmentDao.count();
+    }
+
 }
