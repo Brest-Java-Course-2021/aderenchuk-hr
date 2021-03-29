@@ -1,7 +1,7 @@
-package com.epam.brest.service.impl;
+package com.epam.brest.service_web_app.impl;
 
 import com.epam.brest.model.dto.DepartmentDto;
-import com.epam.brest.service.DepartmentDtoService;
+import com.epam.brest.service_web_app.DepartmentDtoService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;

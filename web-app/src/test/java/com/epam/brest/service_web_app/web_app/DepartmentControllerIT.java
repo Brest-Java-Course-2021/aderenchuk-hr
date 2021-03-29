@@ -1,8 +1,8 @@
-package com.epam.brest.service.web_app;
+package com.epam.brest.service_web_app.web_app;
 
 
 import com.epam.brest.model.Department;
-import com.epam.brest.service.DepartmentService;
+import com.epam.brest.service_web_app.DepartmentService;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;

@@ -1,4 +1,4 @@
-package com.epam.brest.service;
+package com.epam.brest.service_web_app;
 
 import com.epam.brest.model.Department;
 
