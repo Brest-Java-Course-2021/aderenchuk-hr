@@ -1,6 +1,8 @@
-package com.epam.brest.service_web_app;
+package com.epam.brest.service.web_app;
 
 import com.epam.brest.model.Department;
+import com.epam.brest.service.DepartmentDtoService;
+import com.epam.brest.service.DepartmentService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

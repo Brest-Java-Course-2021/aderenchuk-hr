@@ -1,8 +1,8 @@
-package com.epam.brest.service_web_app.impl;
+package com.epam.brest.service.impl;
 
 import com.epam.brest.dao.DepartmentDtoDao;
 import com.epam.brest.model.dto.DepartmentDto;
-import com.epam.brest.service_web_app.DepartmentDtoService;
+import com.epam.brest.service.DepartmentDtoService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
